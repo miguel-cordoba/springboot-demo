@@ -1,0 +1,29 @@
+INSERT INTO users
+(
+    firstname,
+    lastname,
+    email,
+    password
+)
+VALUES
+    (
+        'Mari',
+        'Cona',
+        'mari_cona@hotmail.com',
+        'mari_cona123'
+    ),
+
+    (
+        'Ariana',
+        'Grande',
+        'araiana@hotmail.com',
+        'arinana'
+    )
+    ,
+    (
+        'La',
+        'Rosalia',
+        'larosi@hotmail.com',
+        'tratra'
+    )
+    ;
