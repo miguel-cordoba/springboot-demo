@@ -1,13 +1,17 @@
-package com.example.springbootdemo;
+package mamc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringbootDemoApplication {
+public class SpringBootDemoApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringbootDemoApplication.class, args);
+        SpringApplication.run(mamc.SpringBootDemoApplication.class, args);
+
+        //bean injecten
+
+
     }
 
 }
