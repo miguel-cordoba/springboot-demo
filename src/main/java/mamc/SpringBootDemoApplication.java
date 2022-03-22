@@ -9,8 +9,6 @@ public class SpringBootDemoApplication {
     public static void main(String[] args) {
         SpringApplication.run(mamc.SpringBootDemoApplication.class, args);
 
-        //bean injecten
-
 
     }
 

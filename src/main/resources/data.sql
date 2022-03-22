@@ -1,4 +1,4 @@
-INSERT INTO users
+INSERT INTO myfriends
 (
     firstname,
     lastname,
@@ -7,10 +7,10 @@ INSERT INTO users
 )
 VALUES
     (
-        'Mari',
-        'Cona',
-        'mari_cona@hotmail.com',
-        'mari_cona123'
+        'Kay',
+        'Result',
+        'okr@hotmail.com',
+        'okr123'
     ),
 
     (
