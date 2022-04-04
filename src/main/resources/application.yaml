@@ -1,9 +1,8 @@
 
 spring:
-  server:
-    port: 8081
-    servlet.contextPath: '/@name@'
-
+server:
+  port: 8888
+  #servlet.contextPath: '/@name@'
   datasource:
     url: jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=TRUE
     username: sa

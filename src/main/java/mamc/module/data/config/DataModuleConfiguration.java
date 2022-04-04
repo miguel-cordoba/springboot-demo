@@ -13,7 +13,8 @@ import javax.persistence.EntityManagerFactory;
 public class DataModuleConfiguration {
 
     @Bean
-    String getServicePort(final Environment environment) {
+   public String getServicePort(final Environment environment) {
+
         return environment.getProperty("server.port");
     }
 
@@ -21,9 +22,6 @@ public class DataModuleConfiguration {
     //public JpaTransactionManager transactionManager(EntityManagerFactory emf){
       //  return new JpaTransactionManager(emf);
     //}
-
-
-
 
 
 
