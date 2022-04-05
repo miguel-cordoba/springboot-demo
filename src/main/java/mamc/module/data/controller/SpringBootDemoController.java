@@ -1,14 +1,16 @@
 package mamc.module.data.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import mamc.module.data.model.Person;
 import mamc.module.data.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,11 +18,12 @@ import java.util.Optional;
 @CrossOrigin
 @RequestMapping(value = "api", produces = "application/json")
 public class SpringBootDemoController {
+    static final String INPUT_JSON_PATH = "src/main/resources/input.json";
+
 
     @Autowired
     PersonRepository repo;
 
-    //TODO: API that queries DB in differents ways with Spring Data JPa
     @GetMapping(value = "ping")
     public String ping() {
         return "pong";
@@ -30,6 +33,11 @@ public class SpringBootDemoController {
     public ResponseEntity updatePersonInfo(@RequestBody Person person){
         repo.save(person);
         return new ResponseEntity(repo.save(person), HttpStatus.OK);
+    }
+
+    @GetMapping("addAllPeople")
+    public ResponseEntity addAllPersons() throws IOException{
+        return new ResponseEntity(repo.saveAll(getPeople()), HttpStatus.OK);
     }
 
     @PostMapping("addPersonsBulk")
@@ -52,24 +60,36 @@ public class SpringBootDemoController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
     }
 
-    //TODO: fixdis
+    @GetMapping("getPersonByName/{name}")
+    public ResponseEntity<List<Person>> getPersonByName(@PathVariable("name") String name) {
+        List<Person> personItem = repo.findByName(name);
+        if (personItem.isEmpty() == false) {
+            return new ResponseEntity<List<Person>>(personItem, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping("deletePerson/{id}")
      public ResponseEntity deletePerson(@PathVariable("id") long id){
-            repo.delete(repo.findById(id).get());
-        return new ResponseEntity<>(HttpStatus.OK);
+        Optional<Person> per= repo.findById(id);
+        repo.delete(per.get());
+        return new ResponseEntity<Person>(HttpStatus.OK);
 
     }
 
-    @DeleteMapping("/deleteAllPersons")
+    @GetMapping("deleteAllPersons")
     public ResponseEntity deleteAllPersons(){
-        return null;
+        repo.deleteAll();
+        return new ResponseEntity(HttpStatus.OK);
     }
 
-
-
-
+    public List<Person> getPeople() throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        return Arrays.asList(mapper.readValue(Paths.get(INPUT_JSON_PATH).toFile(), Person[].class));
+    }
 
 }
+
