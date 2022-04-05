@@ -1,11 +1,15 @@
 
-#server before spring props, on same level
+spring:
+  profiles:
+   active:
+
 server:
   port: 8888
   servlet.contextPath: '/@name@'
-
-
+---
+####### test
 spring:
+  profiles: test
   h2:
    console:
      enabled: true
@@ -16,6 +20,24 @@ spring:
     username: sa
     password:
     driverClassName: org.h2.Driver
+
+###### staging
+---
+
+spring:
+  profiles: stage
+  datasource:
+    url: jdbc:mariadb://mdb4.pde/pde
+    username: preis
+    password: rIhKuNituvuR
+    driverClassName: org.mariadb.jdbc.Driver
+
+server:
+  port: 8081
+
+
+
+
 
 
 
